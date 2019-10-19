@@ -3,6 +3,7 @@
 namespace Album;
 
 use Krystal\Application\Module\AbstractModule;
+use Album\Service\AlbumService;
 
 final class Module extends AbstractModule
 {
@@ -25,6 +26,7 @@ final class Module extends AbstractModule
     public function getServiceProviders()
     {
         return array(
+            'albumService' => new AlbumService($this->createMapper('\Album\Storage\MySQL\AlbumMapper'))
         );
     }
 }
