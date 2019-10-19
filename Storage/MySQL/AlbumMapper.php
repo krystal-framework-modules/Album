@@ -23,4 +23,21 @@ final class AlbumMapper extends AbstractMapper
     {
         return 'id';
     }
+
+    /**
+     * Fetch all photos by user id
+     * 
+     * @param int $userId
+     * @return array
+     */
+    public function fetchAll($userId)
+    {
+        $db = $this->db->select('*')
+                       ->from(self::getTableName())
+                       ->whereEquals('user_id', $userId)
+                       ->orderBy('id')
+                       ->desc();
+
+        return $db->queryAll();
+    }
 }
