@@ -4,8 +4,10 @@ namespace Album\Service;
 
 use Album\Storage\MySQL\AlbumMapper;
 use Krystal\Image\Tool\ImageManager;
+use Krystal\Stdlib\VirtualEntity;
+use Krystal\Application\Model\AbstractService;
 
-final class AlbumService
+final class AlbumService extends AbstractService
 {
     /**
      * Any compliant album mapper
@@ -32,6 +34,23 @@ final class AlbumService
     {
         $this->albumMapper = $albumMapper;
         $this->imageManager = $imageManager;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function toEntity(array $row)
+    {
+        $imgBag = clone $this->imageManager->getImageBag();
+        $imgBag->setCover($row['file'])
+               ->setId($row['id']);
+
+        $entity = new VirtualEntity();
+        $entity->setId($row['id'])
+               ->setFile($row['file'])
+               ->setImageBag($imgBag);
+
+        return $entity;
     }
 
     /**
@@ -66,6 +85,6 @@ final class AlbumService
      */
     public function fetchAll($userId)
     {
-        return $this->albumMapper->fetchAll($userId);
+        return $this->prepareResults($this->albumMapper->fetchAll($userId));
     }
 }
