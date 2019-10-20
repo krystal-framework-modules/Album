@@ -13,6 +13,8 @@ final class Album extends AbstractSiteController
      */
     public function indexAction()
     {
+        $this->view->getPluginBag()->appendLastScript('@Album/grid-layout.js');
+        
         return $this->view->render('profile/album', array(
             'photos' => $this->getModuleService('albumService')->fetchAll($this->getAuthService()->getId())
         ));

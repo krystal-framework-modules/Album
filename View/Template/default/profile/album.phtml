@@ -18,13 +18,11 @@ use Krystal\Form\Element;
 </div>
 
 <?php if (!empty($photos)): ?>
-<div class="row">
+<section>
 
     <?php foreach ($photos as $photo): ?>
-    <div class="col">
-        <img src="<?= $photo->getImageBag()->getUrl('original'); ?>" class="img-fluid" />
-    </div>
+    <img src="<?= $photo->getImageBag()->getUrl('original'); ?>" class="img-fluid" />
     <?php endforeach; ?>
 
-</div>
+</section>
 <?php endif; ?>
