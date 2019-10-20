@@ -1,0 +1,30 @@
+<?php
+
+use Krystal\Form\Element;
+
+?>
+
+<div class="mb-2">
+    <form method="POST" action="<?= $this->url('Album:Album@uploadAction'); ?>">
+        <div class="form-group">
+            <?= Element::file('file'); ?>
+        </div>
+
+        <?= Element::submit(
+            $this->translate('Upload new photo'),
+            ['class' => 'btn btn-success']
+        ); ?>
+    </form>
+</div>
+
+<?php if (!empty($photos)): ?>
+<div class="row">
+
+    <?php foreach ($photos as $photo): ?>
+    <div class="col">
+        <img src="<?= $photo->getImageBag()->getUrl('original'); ?>" class="img-fluid" />
+    </div>
+    <?php endforeach; ?>
+
+</div>
+<?php endif; ?>
