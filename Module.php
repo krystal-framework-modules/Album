@@ -43,6 +43,15 @@ final class Module extends AbstractModule
      */
     public function getRoutes()
     {
+        return [
+            '/profile/album' => [
+                'controller' => 'Album@indexAction'
+            ],
+
+            '/profile/album/upload' => [
+                'controller' => 'Album@uploadAction'
+            ]
+        ];
     }
 
     /**
