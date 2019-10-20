@@ -4,6 +4,26 @@ use Krystal\Form\Element;
 
 ?>
 
+<style>
+
+.album {
+    position: relative;
+}
+
+.album img {
+    
+}
+
+.album a {
+    position: absolute;
+    background: #da6565;
+    padding: 7px;
+    color: #fff;
+    font-size: 10px;
+}
+
+</style>
+
 <div class="mb-2">
     <form method="POST" action="<?= $this->url('Album:Album@uploadAction'); ?>">
         <div class="form-group">
@@ -18,9 +38,10 @@ use Krystal\Form\Element;
 </div>
 
 <?php if (!empty($photos)): ?>
-<section>
+<section class="album">
 
     <?php foreach ($photos as $photo): ?>
+    <a href="<?= $this->url('Album:Album@deleteAction', [$photo->getId()]); ?>"><i class="far fa-trash-alt"></i></a>
     <img src="<?= $photo->getImageBag()->getUrl('original'); ?>" class="img-fluid" />
     <?php endforeach; ?>
 
