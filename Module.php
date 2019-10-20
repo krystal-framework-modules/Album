@@ -50,6 +50,10 @@ final class Module extends AbstractModule
 
             '/profile/album/upload' => [
                 'controller' => 'Album@uploadAction'
+            ],
+
+            '/profile/album/delete/(:var)' => [
+                'controller' => 'Album@deleteAction'
             ]
         ];
     }

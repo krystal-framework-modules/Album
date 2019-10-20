@@ -14,10 +14,24 @@ final class Album extends AbstractSiteController
     public function indexAction()
     {
         $this->view->getPluginBag()->appendLastScript('@Album/grid-layout.js');
-        
+
         return $this->view->render('profile/album', array(
             'photos' => $this->getModuleService('albumService')->fetchAll($this->getAuthService()->getId())
         ));
+    }
+
+    /**
+     * Deletes a photo by its id
+     * 
+     * @param string $id Photo id
+     * @return string
+     */
+    public function deleteAction($id)
+    {
+        $this->getModuleService('albumService')->delete($id, $this->getAuthService()->getId());
+
+        $this->flashBag->set('success', 'Selected photo has been deleted successfully');
+        $this->response->back();
     }
 
     /**
