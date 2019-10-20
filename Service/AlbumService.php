@@ -54,6 +54,18 @@ final class AlbumService extends AbstractService
     }
 
     /**
+     * Deletes photo by its id
+     * 
+     * @param int $id Photo id
+     * @param int $userId User id
+     * @return boolean
+     */
+    public function delete($id, $userId)
+    {
+        return $this->albumMapper->delete($id, $userId) && $this->imageManager->delete($id);
+    }
+
+    /**
      * Uploads a new photo
      * 
      * @param int $userId

@@ -25,6 +25,23 @@ final class AlbumMapper extends AbstractMapper
     }
 
     /**
+     * Deletes photo by its id
+     * 
+     * @param int $id Photo id
+     * @param int $userId User id
+     * @return boolean
+     */
+    public function delete($id, $userId)
+    {
+        $db = $this->db->delete()
+                       ->from(self::getTableName())
+                       ->whereEquals('id', $id)
+                       ->andWhereEquals('user_id', $userId);
+
+        return (bool) $db->execute(true);
+    }
+
+    /**
      * Fetch all photos by user id
      * 
      * @param int $userId
